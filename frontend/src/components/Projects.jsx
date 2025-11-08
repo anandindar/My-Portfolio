@@ -1,6 +1,5 @@
 import React from 'react'
-import { FaProjectDiagram, FaGithub, FaExternalLinkAlt, FaPython, FaDatabase, FaChartBar } from 'react-icons/fa'
-import { SiIbm, SiPandas, SiPlotly } from 'react-icons/si'
+import { FaProjectDiagram, FaGithub, FaExternalLinkAlt, FaDatabase, FaChartBar } from 'react-icons/fa'
 import './Projects.css'
 
 const Projects = () => {

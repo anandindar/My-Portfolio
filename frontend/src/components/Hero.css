@@ -5,9 +5,19 @@
   justify-content: center;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding-top: 80px;
+  padding-top: 180px;
   position: relative;
   overflow: hidden;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  50% {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  }
 }
 
 .hero::before {
@@ -34,10 +44,23 @@
 }
 
 .hero-content {
-  max-width: 900px;
-  text-align: center;
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 30px;
   position: relative;
   z-index: 1;
+}
+
+.hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.hero-text {
+  flex: 1;
+  text-align: left;
 }
 
 .hero-title {
@@ -89,7 +112,7 @@
 .hero-buttons {
   display: flex;
   gap: 20px;
-  justify-content: center;
+  justify-content: flex-start;
   margin-bottom: 40px;
   animation: fadeInUp 1.4s ease;
 }
@@ -156,7 +179,7 @@
 .social-links {
   display: flex;
   gap: 20px;
-  justify-content: center;
+  justify-content: flex-start;
   animation: fadeInUp 1.6s ease;
 }
 
@@ -212,7 +235,92 @@
   }
 }
 
+.hero-portrait {
+  flex: 0 0 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portrait-frame {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  border-radius: 30px;
+  padding: 12px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(148, 163, 255, 0.1));
+  backdrop-filter: blur(18px);
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.35);
+  overflow: hidden;
+}
+
+.portrait-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 22px;
+  position: relative;
+  z-index: 1;
+}
+
+.portrait-glow {
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 30% 30%, rgba(251, 191, 36, 0.25), transparent 60%),
+              radial-gradient(circle at 70% 70%, rgba(59, 130, 246, 0.35), transparent 55%);
+  filter: blur(15px);
+  z-index: 0;
+  animation: float 8s ease-in-out infinite;
+}
+
+.availability-tag {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.9), rgba(139, 92, 246, 0.9));
+  color: white;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 12px 25px rgba(59, 130, 246, 0.35);
+  z-index: 2;
+}
+
 @media (max-width: 768px) {
+  .hero-content {
+    padding: 0 20px;
+  }
+
+  .hero-inner {
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .hero-text {
+    text-align: center;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+
+  .hero-portrait {
+    flex: none;
+  }
+
+  .portrait-frame {
+    width: 220px;
+    height: 220px;
+  }
+
   .hero-title {
     font-size: 2.5rem;
   }

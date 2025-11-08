@@ -1,96 +1,128 @@
 import React, { useState, useEffect } from 'react'
-import { FaBars, FaTimes, FaHome, FaUser, FaGraduationCap, FaCode, FaCertificate, FaProjectDiagram, FaTrophy, FaEnvelope } from 'react-icons/fa'
+import {
+  FaBars,
+  FaTimes,
+  FaHome,
+  FaUser,
+  FaGraduationCap,
+  FaCode,
+  FaCertificate,
+  FaProjectDiagram,
+  FaTrophy,
+  FaEnvelope
+} from 'react-icons/fa'
 import './Header.css'
+
+const MENU_ITEMS = [
+  { id: 'home', label: 'Home', href: '#home', icon: <FaHome /> },
+  { id: 'about', label: 'About', href: '#about', icon: <FaUser /> },
+  { id: 'education', label: 'Education', href: '#education', icon: <FaGraduationCap /> },
+  { id: 'skills', label: 'Skills', href: '#skills', icon: <FaCode /> },
+  { id: 'certifications', label: 'Certifications', href: '#certifications', icon: <FaCertificate /> },
+  { id: 'projects', label: 'Projects', href: '#projects', icon: <FaProjectDiagram /> },
+  { id: 'achievements', label: 'Achievements', href: '#achievements', icon: <FaTrophy /> },
+  { id: 'contact', label: 'Contact', href: '#contact', icon: <FaEnvelope /> }
+]
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState('home')
+  const [activeSection, setActiveSection] = useState(MENU_ITEMS[0].id)
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-      
-      // Detect active section
-      const sections = ['home', 'about', 'education', 'skills', 'certifications', 'projects', 'achievements', 'contact']
-      const scrollPosition = window.scrollY + 100
-      
-      for (const section of sections) {
-        const element = document.getElementById(section)
-        if (element) {
-          const offsetTop = element.offsetTop
-          const offsetHeight = element.offsetHeight
-          
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section)
-            break
-          }
+      const currentScrollY = window.scrollY
+      setIsScrolled(currentScrollY > 12)
+
+      const scrollPosition = currentScrollY + 140
+      let currentSection = MENU_ITEMS[0].id
+
+      for (const item of MENU_ITEMS) {
+        const target = document.getElementById(item.id)
+        if (!target) {
+          continue
+        }
+
+        const offsetTop = target.offsetTop
+        const offsetHeight = target.offsetHeight
+
+        if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+          currentSection = item.id
+          break
         }
       }
+
+      setActiveSection(currentSection)
     }
 
+    handleScroll()
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const menuItems = [
-    { name: 'Home', href: '#home', icon: <FaHome /> },
-    { name: 'About', href: '#about', icon: <FaUser /> },
-    { name: 'Education', href: '#education', icon: <FaGraduationCap /> },
-    { name: 'Skills', href: '#skills', icon: <FaCode /> },
-    { name: 'Certifications', href: '#certifications', icon: <FaCertificate /> },
-    { name: 'Projects', href: '#projects', icon: <FaProjectDiagram /> },
-    { name: 'Achievements', href: '#achievements', icon: <FaTrophy /> },
-    { name: 'Contact', href: '#contact', icon: <FaEnvelope /> }
-  ]
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1024 && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false)
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [isMobileMenuOpen])
+
+  useEffect(() => {
+    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isMobileMenuOpen])
 
   const handleMenuClick = () => {
     setIsMobileMenuOpen(false)
+  }
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen((prev) => !prev)
   }
 
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="header-container">
         <a href="#home" className="logo" onClick={handleMenuClick}>
-          <span className="logo-text">Anand</span>
-          <span className="logo-highlight">Kumar Gupta</span>
+          <span className="logo-mark">AG</span>
+          <div className="logo-text-group">
+            <span className="logo-title">Anand Kumar Gupta</span>
+            <span className="logo-subtitle">Data Science &amp; AI Enthusiast</span>
+          </div>
         </a>
-        
+
         <nav className={`nav ${isMobileMenuOpen ? 'active' : ''}`}>
-          {menuItems.map((item) => (
-            <a 
-              key={item.name}
+          {MENU_ITEMS.map((item) => (
+            <a
+              key={item.id}
               href={item.href}
-              className={`nav-link ${activeSection === item.name.toLowerCase() ? 'active' : ''}`}
+              className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
               onClick={handleMenuClick}
             >
               <span className="nav-icon">{item.icon}</span>
-              <span className="nav-text">{item.name}</span>
+              <span className="nav-text">{item.label}</span>
             </a>
           ))}
         </nav>
 
         <div className="header-right">
-          <a href="#contact" className="btn-hire" onClick={handleMenuClick}>
-            Hire Me
-          </a>
-          <button 
-            className="mobile-menu-toggle" 
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
+          <button
+            className="mobile-menu-toggle"
+            onClick={toggleMobileMenu}
+            aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           >
             {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
           </button>
         </div>
       </div>
-      
-      {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div 
-          className="mobile-overlay" 
-          onClick={() => setIsMobileMenuOpen(false)}
-        ></div>
-      )}
+
+      {isMobileMenuOpen && <div className="mobile-overlay" onClick={handleMenuClick}></div>}
     </header>
   )
 }

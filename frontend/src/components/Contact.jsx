@@ -54,7 +54,7 @@ const Contact = () => {
               </div>
               <div className="contact-item-content">
                 <h4>Phone</h4>
-                <a href="tel:8933028358">+91 8933028358</a>
+                <a href="tel:+918933028358">+91 8933028358</a>
               </div>
             </div>
 
@@ -74,7 +74,7 @@ const Contact = () => {
               </div>
               <div className="contact-item-content">
                 <h4>LinkedIn</h4>
-                <a href="https://www.linkedin.com/in/anand-kumar-gupta" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.linkedin.com/in/anand-kumar-gupta-26556728a/" target="_blank" rel="noopener noreferrer">
                   View Profile
                 </a>
               </div>
@@ -86,7 +86,7 @@ const Contact = () => {
               </div>
               <div className="contact-item-content">
                 <h4>GitHub</h4>
-                <a href="https://anandindar.github.io" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/anandindar" target="_blank" rel="noopener noreferrer">
                   View Projects
                 </a>
               </div>

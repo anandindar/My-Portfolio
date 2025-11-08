@@ -6,7 +6,7 @@ const Achievements = () => {
   const achievements = [
     {
       title: "Class Representative",
-      period: "2023–25",
+      period: "2023–26",
       description: "Acted as a bridge between faculty and students, ensuring smooth communication and resolving concerns effectively.",
       icon: <FaUsers />
     },
