@@ -1,5 +1,7 @@
 import express from 'express'
 import cors from 'cors'
+import path from 'path'
+import { fileURLToPath } from 'url'
 import contactRouter from './routes/contact.js'
 
 const app = express()
@@ -13,9 +15,19 @@ app.get('/health', (_req, res) => {
 
 app.use('/api/contact', contactRouter)
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const distPath = path.resolve(__dirname, '../dist')
+
 app.use((err, _req, res, _next) => {
   console.error('Unhandled error', err)
   res.status(500).json({ message: 'Something went wrong. Please try again later.' })
+})
+
+app.use(express.static(distPath))
+
+app.get('*', (_req, res) => {
+  res.sendFile(path.join(distPath, 'index.html'))
 })
 
 export default app

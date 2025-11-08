@@ -11,7 +11,7 @@ const Contact = () => {
   const [status, setStatus] = useState({ type: 'idle', message: '' })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const contactEndpoint = import.meta.env.VITE_CONTACT_ENDPOINT ?? ''
+  const contactEndpoint = import.meta.env.VITE_CONTACT_ENDPOINT || '/api/contact'
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -19,14 +19,6 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
-    if (!contactEndpoint) {
-      setStatus({
-        type: 'error',
-        message: 'Contact form is not configured yet. Please email me at anandkumargupta0814@gmail.com.'
-      })
-      return
-    }
 
     try {
       setIsSubmitting(true)

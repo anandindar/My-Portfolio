@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5000
 const mongoUri = process.env.MONGODB_URI
 
 if (!mongoUri) {
-  console.error('Missing MONGODB_URI environment variable. Set it in your environment before starting the server.')
+  console.error('Missing MONGODB_URI environment variable. Set it before starting the server.')
   process.exit(1)
 }
 
