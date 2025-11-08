@@ -262,6 +262,35 @@
   transform: translateX(5px);
 }
 
+.submit-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.75;
+  box-shadow: none;
+}
+
+.submit-btn:disabled:hover {
+  transform: none;
+}
+
+.form-status {
+  margin-top: 18px;
+  font-size: 0.95rem;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.form-status-success {
+  color: #16a34a;
+}
+
+.form-status-error {
+  color: #dc2626;
+}
+
+.form-status-pending {
+  color: var(--primary-color);
+}
+
 /* Responsive Design */
 @media (max-width: 968px) {
   .contact-content {

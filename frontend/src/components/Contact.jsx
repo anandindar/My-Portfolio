@@ -8,16 +8,57 @@ const Contact = () => {
     email: '',
     message: ''
   })
+  const [status, setStatus] = useState({ type: 'idle', message: '' })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const contactEndpoint = import.meta.env.VITE_CONTACT_ENDPOINT ?? ''
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    // Add your form submission logic here
-    alert('Message sent! I will get back to you soon.')
-    setFormData({ name: '', email: '', message: '' })
+
+    if (!contactEndpoint) {
+      setStatus({
+        type: 'error',
+        message: 'Contact form is not configured yet. Please email me at anandkumargupta0814@gmail.com.'
+      })
+      return
+    }
+
+    try {
+      setIsSubmitting(true)
+      setStatus({ type: 'pending', message: 'Sending your message…' })
+
+      const response = await fetch(contactEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message
+        })
+      })
+
+      if (!response.ok) {
+        throw new Error('Unable to send your message right now. Please try again in a moment.')
+      }
+
+      setStatus({
+        type: 'success',
+        message: "Thanks for reaching out! I've received your message and will respond soon."
+      })
+      setFormData({ name: '', email: '', message: '' })
+    } catch (error) {
+      setStatus({ type: 'error', message: error.message })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -136,10 +177,16 @@ const Contact = () => {
             ></textarea>
           </div>
 
-          <button type="submit" className="submit-btn">
+          <button type="submit" className="submit-btn" disabled={isSubmitting}>
             <FaPaperPlane />
-            Send Message
+            {isSubmitting ? 'Sending…' : 'Send Message'}
           </button>
+
+          {status.message && (
+            <p className={`form-status form-status-${status.type}`}>
+              {status.message}
+            </p>
+          )}
         </form>
       </div>
     </section>
