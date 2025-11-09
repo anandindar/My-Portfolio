@@ -67,10 +67,11 @@ const Skills = () => {
     'Jupyter Notebook',
     'Git & GitHub',
     'VS Code',
+    'MS Word',
     'IBM SPSS',
+    'IBM Cognos',
     'Excel',
     'Google Colab',
-    'Anaconda',
     'Docker'
   ]
 

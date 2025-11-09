@@ -45,6 +45,20 @@ const Projects = () => {
       ],
       category: "Business Intelligence",
       color: "green"
+    },
+    {
+      title: "IPL Dashboard Analytics",
+      description: "Designed an end-to-end Power BI dashboard that highlights Indian Premier League team and player performance trends to support quick insights for stakeholders.",
+      icon: <FaChartBar />,
+      technologies: ["Power BI", "DAX", "Data Modeling", "Power Query"],
+      highlights: [
+        "Consolidated multi-season IPL datasets into a clean model",
+        "Built interactive match, team, and player slicers",
+        "Delivered insights via the shared IPL Dashboard.pbix report",
+        "Automated refresh ready for future seasons"
+      ],
+      category: "Business Intelligence",
+      color: "orange"
     }
   ]
 

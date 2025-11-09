@@ -13,6 +13,12 @@ router.post('/', async (req, res, next) => {
 
     const newMessage = await Message.create({ name, email, message })
 
+    console.log('Contact saved', {
+      id: newMessage._id.toString(),
+      email: newMessage.email,
+      createdAt: newMessage.createdAt
+    })
+
     res.status(201).json({
       message: 'Message received successfully.',
       data: {

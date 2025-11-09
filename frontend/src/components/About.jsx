@@ -29,8 +29,8 @@ const About = () => {
             <p>Certifications</p>
           </div>
           <div className="stat-card">
-            <h3>2+</h3>
-            <p>Years Experience</p>
+            <h3>Intern</h3>
+            <p>Student (Fresher)</p>
           </div>
           <div className="stat-card">
             <h3>5+</h3>

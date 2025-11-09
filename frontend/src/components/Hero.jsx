@@ -43,7 +43,6 @@ const Hero = () => {
             <div className="portrait-frame">
               <span className="portrait-glow" aria-hidden="true"></span>
               <img src={profilePhoto} alt="Anand Kumar Gupta" loading="lazy" />
-              <div className="availability-tag">Open to Opportunities</div>
             </div>
           </div>
         </div>
