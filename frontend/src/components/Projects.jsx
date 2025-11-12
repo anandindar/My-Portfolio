@@ -60,6 +60,21 @@ const Projects = () => {
       category: "Business Intelligence",
       color: "orange"
     }
+    ,
+    {
+      title: "Superstore Sales Analysis",
+      description: "Performed end-to-end analysis on the Superstore dataset to surface sales, profit, and customer insights. Built interactive dashboards for executive and operational use.",
+      icon: <FaProjectDiagram />,
+      technologies: ["Tableau", "SQL", "Excel", "Power BI"],
+      highlights: [
+        "Created sales & profit heatmaps across regions and product categories",
+        "Built customer segmentation using RFM analysis",
+        "Designed an executive dashboard with key KPIs and trend analysis",
+        "Optimized visualizations for drill-down and export"
+      ],
+      category: "Data Analytics",
+      color: "blue"
+    }
   ]
 
   const getColorClass = (color) => {
