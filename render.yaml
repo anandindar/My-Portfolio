@@ -1,0 +1,28 @@
+services:
+  # Frontend Static Site
+  - type: web
+    name: portfolio-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/build
+    envVars:
+      - key: NODE_VERSION
+        value: 18.17.0
+      - key: VITE_CONTACT_ENDPOINT
+        sync: false
+
+  # Backend Web Service
+  - type: web
+    name: portfolio-backend
+    env: node
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && node index.js
+    envVars:
+      - key: NODE_VERSION
+        value: 18.17.0
+      - key: MONGODB_URI
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: PORT
+        value: 10000
