@@ -1,17 +1,11 @@
 import React from 'react'
 import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaPaperPlane } from 'react-icons/fa'
 import './Hero.css'
-import profileImage from '../assets/Image/Profile Photo.jpeg'
 
 const Hero = () => {
   return (
     <section id="home" className="hero">
       <div className="hero-content">
-        {/* Profile Image */}
-        <div className="hero-image-container">
-          <img src={profileImage} alt="Anand Kumar Gupta" className="hero-profile-image" />
-        </div>
-
         {/* Text Content */}
         <div className="hero-text-content">
           <h1 className="hero-title">

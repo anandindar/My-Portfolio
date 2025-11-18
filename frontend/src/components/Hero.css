@@ -43,7 +43,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 80px;
   position: relative;
   z-index: 1;
@@ -73,9 +73,11 @@
 
 .hero-text-content {
   flex: 1;
+  max-width: 800px;
   display: flex;
   flex-direction: column;
   gap: 25px;
+  text-align: center;
 }
 
 .hero-top {
