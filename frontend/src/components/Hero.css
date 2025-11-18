@@ -79,6 +79,7 @@
   flex-direction: column;
   gap: 25px;
   text-align: center;
+  margin-top: 40vh;
 }
 
 .hero-top {
