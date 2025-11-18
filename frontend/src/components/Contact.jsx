@@ -11,7 +11,9 @@ const Contact = () => {
   const [status, setStatus] = useState({ type: 'idle', message: '' })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const contactEndpoint = import.meta.env.VITE_CONTACT_ENDPOINT || '/api/contact'
+  // Use full backend URL to ensure it works on mobile
+  const contactEndpoint = import.meta.env.VITE_CONTACT_ENDPOINT || 
+    'https://my-portfolio-backend-huy6.onrender.com/api/contact'
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })

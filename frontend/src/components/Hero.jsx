@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaGithub, FaLinkedin, FaEnvelope, FaPhone } from 'react-icons/fa'
 import profilePhoto from '../assets/Image/Profile Photo.jpeg'
+import homebg from '../assets/Image/homebg.jpg'
 import './Hero.css'
 
 const Hero = () => {

@@ -3,7 +3,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%), 
+              url('../assets/Image/homebg.jpg') center/cover no-repeat;
+  background-attachment: fixed;
   color: white;
   padding: 80px 20px 60px;
   position: relative;
@@ -246,23 +248,36 @@
 
 .portrait-frame {
   position: relative;
-  width: 300px;
-  height: 300px;
-  border-radius: 36px;
-  padding: 14px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(148, 163, 255, 0.1));
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  padding: 8px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(251, 191, 36, 0.2));
   backdrop-filter: blur(20px);
-  box-shadow: 0 28px 65px rgba(15, 23, 42, 0.35);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 
+              0 0 0 8px rgba(255, 255, 255, 0.1),
+              0 0 0 16px rgba(255, 255, 255, 0.05);
   overflow: hidden;
+  animation: profileFloat 3s ease-in-out infinite;
+}
+
+@keyframes profileFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .portrait-frame img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 28px;
+  border-radius: 50%;
   position: relative;
   z-index: 1;
+  border: 4px solid rgba(255, 255, 255, 0.4);
 }
 
 .portrait-glow {
@@ -323,14 +338,15 @@
   }
 
   .portrait-frame {
-    width: 260px;
-    height: 260px;
-    border-radius: 30px;
-    padding: 12px;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    padding: 6px;
   }
 
   .portrait-frame img {
-    border-radius: 24px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.4);
   }
 
   .hero-title {
