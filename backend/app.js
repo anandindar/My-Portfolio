@@ -6,7 +6,10 @@ import contactRouter from './routes/contact.js'
 
 const app = express()
 
-app.use(cors({ origin: true }))
+app.use(cors({ 
+  origin: [process.env.FRONTEND_URL, 'http://localhost:5173', 'http://localhost:3000'],
+  credentials: true 
+}))
 app.use(express.json())
 
 app.get('/health', (_req, res) => {
@@ -17,7 +20,7 @@ app.use('/api/contact', contactRouter)
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-const distPath = path.resolve(__dirname, '../dist')
+const distPath = path.resolve(__dirname, '../frontend/dist')
 
 app.use((err, _req, res, _next) => {
   console.error('Unhandled error', err)

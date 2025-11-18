@@ -31,33 +31,39 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      setIsScrolled(currentScrollY > 12)
-
-      const scrollPosition = currentScrollY + 140
-      let currentSection = MENU_ITEMS[0].id
-
-      for (const item of MENU_ITEMS) {
-        const target = document.getElementById(item.id)
-        if (!target) {
-          continue
-        }
-
-        const offsetTop = target.offsetTop
-        const offsetHeight = target.offsetHeight
-
-        if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-          currentSection = item.id
-          break
-        }
-      }
-
-      setActiveSection(currentSection)
+      setIsScrolled(window.scrollY > 12)
     }
 
-    handleScroll()
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        let maxRatio = 0
+        let activeId = null
+        
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+            maxRatio = entry.intersectionRatio
+            activeId = entry.target.id
+          }
+        })
+        
+        if (activeId) {
+          setActiveSection(activeId)
+        }
+      },
+      { threshold: [0, 0.25, 0.5, 0.75, 1] }
+    )
+
+    MENU_ITEMS.forEach((item) => {
+      const element = document.getElementById(item.id)
+      if (element) observer.observe(element)
+    })
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      observer.disconnect()
+    }
   }, [])
 
   useEffect(() => {
@@ -71,12 +77,7 @@ const Header = () => {
     return () => window.removeEventListener('resize', handleResize)
   }, [isMobileMenuOpen])
 
-  useEffect(() => {
-    document.body.style.overflow = isMobileMenuOpen ? 'hidden' : ''
-    return () => {
-      document.body.style.overflow = ''
-    }
-  }, [isMobileMenuOpen])
+
 
   const handleMenuClick = () => {
     setIsMobileMenuOpen(false)
@@ -87,7 +88,7 @@ const Header = () => {
   }
 
   return (
-    <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
+    <header className={`header ${isScrolled ? 'scrolled' : ''} ${isMobileMenuOpen ? 'menu-open' : ''}`}>
       <div className="header-container">
         <a href="#home" className="logo" onClick={handleMenuClick}>
           <span className="logo-mark">AG</span>

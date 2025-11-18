@@ -90,7 +90,6 @@ const Projects = () => {
   return (
     <section id="projects" className="projects">
       <div className="section-header">
-        <span className="section-badge">Portfolio</span>
         <h2 className="section-title">Featured Projects</h2>
         <p className="section-subtitle">
           Explore my recent work in data science, machine learning, and analytics
