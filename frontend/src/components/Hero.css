@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), 
+  background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), 
                     url('../assets/Image/homebg.jpg');
   background-size: cover;
   background-position: center 35%;
@@ -42,7 +42,7 @@
 .hero-top {
   text-align: center;
   margin-bottom: 60px;
-  text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .hero-bottom {
@@ -60,7 +60,7 @@
   flex-direction: column;
   justify-content: flex-end;
   gap: 25px;
-  text-shadow: 2px 3px 6px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .hero-bottom-right {
@@ -90,11 +90,11 @@
   animation: none;
   letter-spacing: -1px;
   line-height: 1.2;
-  text-shadow: 3px 5px 10px rgba(0, 0, 0, 0.6);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .highlight {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -109,7 +109,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+  background: linear-gradient(90deg, #60a5fa, #a78bfa);
   border-radius: 2px;
   opacity: 0.5;
 }
