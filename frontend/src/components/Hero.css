@@ -3,12 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)), 
-                    url('../assets/Image/bgimg.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
   color: white;
   padding: 80px 40px 60px;
   position: relative;
@@ -42,12 +37,11 @@
   max-width: 1400px;
   width: 100%;
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
   gap: 80px;
   position: relative;
   z-index: 1;
-  padding-bottom: 80px;
 }
 
 .hero-image-container {
@@ -74,12 +68,9 @@
 
 .hero-text-content {
   flex: 1;
-  max-width: 800px;
   display: flex;
   flex-direction: column;
   gap: 25px;
-  text-align: center;
-  margin-top: 40vh;
 }
 
 .hero-top {
