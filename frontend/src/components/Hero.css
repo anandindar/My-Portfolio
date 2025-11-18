@@ -42,11 +42,12 @@
   max-width: 1400px;
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   gap: 80px;
   position: relative;
   z-index: 1;
+  padding-bottom: 80px;
 }
 
 .hero-image-container {
