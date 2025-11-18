@@ -1,0 +1,58 @@
+name: Service Health Check
+
+on:
+  schedule:
+    # Run every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    name: Check Service Health
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Frontend Service
+        run: |
+          echo "🔍 Checking frontend service..."
+          response=$(curl -s -w "\n%{http_code}" -o /dev/null https://anandindar.onrender.com)
+          
+          if [ "$response" -eq 200 ]; then
+            echo "✅ Frontend is healthy (HTTP $response)"
+          else
+            echo "❌ Frontend returned HTTP $response"
+            exit 1
+          fi
+
+      - name: Check Backend Service
+        run: |
+          echo "🔍 Checking backend service..."
+          response=$(curl -s -w "\n%{http_code}" -o /dev/null https://my-portfolio-backend-huy6.onrender.com)
+          
+          if [ "$response" -eq 200 ]; then
+            echo "✅ Backend is healthy (HTTP $response)"
+          else
+            echo "❌ Backend returned HTTP $response"
+            exit 1
+          fi
+
+      - name: Check Contact API Endpoint
+        run: |
+          echo "🔍 Checking contact API endpoint..."
+          response=$(curl -s -w "\n%{http_code}" -X OPTIONS https://my-portfolio-backend-huy6.onrender.com/api/contact)
+          http_code=$(echo "$response" | tail -n1)
+          
+          if [ "$http_code" -eq 200 ] || [ "$http_code" -eq 204 ]; then
+            echo "✅ Contact API is healthy (HTTP $http_code)"
+          else
+            echo "⚠️  Contact API returned HTTP $http_code (may need investigation)"
+          fi
+
+      - name: Send notification on failure
+        if: failure()
+        run: |
+          echo "❌ Service health check failed!"
+          echo "Please check:"
+          echo "  - Frontend: https://anandindar.onrender.com"
+          echo "  - Backend: https://my-portfolio-backend-huy6.onrender.com"
+          echo "  - Render Dashboard: https://dashboard.render.com"

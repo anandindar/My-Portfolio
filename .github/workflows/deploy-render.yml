@@ -10,8 +10,9 @@ permissions:
   contents: read
 
 jobs:
-  build-and-deploy:
-    name: Build and Trigger Render Deploy
+  # Frontend Build and Test
+  frontend-build:
+    name: Build Frontend
     runs-on: ubuntu-latest
 
     steps:
@@ -25,26 +26,113 @@ jobs:
           cache: 'npm'
           cache-dependency-path: frontend/package-lock.json
 
-      - name: Install dependencies
+      - name: Install frontend dependencies
         working-directory: frontend
         run: npm ci
 
-      - name: Run build
+      - name: Build frontend
         working-directory: frontend
         run: npm run build
 
-      - name: Trigger Render deploy
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: frontend/dist
+          retention-days: 1
+
+  # Backend Validation
+  backend-validate:
+    name: Validate Backend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: npm install
+
+      - name: Check backend syntax
+        working-directory: backend
+        run: node --check index.js
+
+  # Deploy Frontend to Render
+  deploy-frontend:
+    name: Deploy Frontend to Render
+    needs: frontend-build
+    runs-on: ubuntu-latest
+    if: success()
+
+    steps:
+      - name: Trigger Frontend Render Deploy
         env:
-          RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
+          RENDER_FRONTEND_SERVICE_ID: ${{ secrets.RENDER_FRONTEND_SERVICE_ID }}
           RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
         run: |
-          if [ -z "$RENDER_SERVICE_ID" ] || [ -z "$RENDER_API_KEY" ]; then
-            echo "Render secrets are not configured." >&2
+          if [ -z "$RENDER_FRONTEND_SERVICE_ID" ] || [ -z "$RENDER_API_KEY" ]; then
+            echo "⚠️  Frontend Render secrets not configured - skipping deploy"
+            exit 0
+          fi
+
+          echo "🚀 Triggering frontend deployment..."
+          response=$(curl -s -w "\n%{http_code}" -X POST \
+            -H "Authorization: Bearer ${RENDER_API_KEY}" \
+            -H "Content-Type: application/json" \
+            https://api.render.com/v1/services/${RENDER_FRONTEND_SERVICE_ID}/deploys \
+            -d '{"clearCache": false}')
+          
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+          
+          if [ "$http_code" -eq 201 ]; then
+            echo "✅ Frontend deployment triggered successfully"
+          else
+            echo "❌ Frontend deployment failed with status: $http_code"
+            echo "$body"
             exit 1
           fi
 
-          curl -X POST \
+  # Deploy Backend to Render
+  deploy-backend:
+    name: Deploy Backend to Render
+    needs: backend-validate
+    runs-on: ubuntu-latest
+    if: success()
+
+    steps:
+      - name: Trigger Backend Render Deploy
+        env:
+          RENDER_BACKEND_SERVICE_ID: ${{ secrets.RENDER_BACKEND_SERVICE_ID }}
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        run: |
+          if [ -z "$RENDER_BACKEND_SERVICE_ID" ] || [ -z "$RENDER_API_KEY" ]; then
+            echo "⚠️  Backend Render secrets not configured - skipping deploy"
+            exit 0
+          fi
+
+          echo "🚀 Triggering backend deployment..."
+          response=$(curl -s -w "\n%{http_code}" -X POST \
             -H "Authorization: Bearer ${RENDER_API_KEY}" \
             -H "Content-Type: application/json" \
-            https://api.render.com/v1/services/${RENDER_SERVICE_ID}/deploys \
-            -d '{"clearCache": false}'
+            https://api.render.com/v1/services/${RENDER_BACKEND_SERVICE_ID}/deploys \
+            -d '{"clearCache": false}')
+          
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | sed '$d')
+          
+          if [ "$http_code" -eq 201 ]; then
+            echo "✅ Backend deployment triggered successfully"
+          else
+            echo "❌ Backend deployment failed with status: $http_code"
+            echo "$body"
+            exit 1
+          fi
