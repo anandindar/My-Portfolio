@@ -1,7 +1,5 @@
 import React from 'react'
 import { FaGithub, FaLinkedin, FaEnvelope, FaPhone } from 'react-icons/fa'
-import profilePhoto from '../assets/Image/Profile Photo.jpeg'
-import homebg from '../assets/Image/homebg.jpg'
 import './Hero.css'
 
 const Hero = () => {
@@ -37,13 +35,6 @@ const Hero = () => {
               <a href="https://www.linkedin.com/in/anand-kumar-gupta-26556728a/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
                 <FaLinkedin />
               </a>
-            </div>
-          </div>
-
-          <div className="hero-portrait">
-            <div className="portrait-frame">
-              <span className="portrait-glow" aria-hidden="true"></span>
-              <img src={profilePhoto} alt="Anand Kumar Gupta" loading="lazy" />
             </div>
           </div>
         </div>
