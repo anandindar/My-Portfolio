@@ -8,8 +8,10 @@ const Admin = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [password, setPassword] = useState('')
 
-  const API_ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT?.replace('/api/contact', '') || 'http://localhost:5000'
-  const ADMIN_PASSWORD = 'admin@2024' // Change this to your secure password
+  // Use full backend URL
+  const API_ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT?.replace('/api/contact', '') || 
+    'https://my-portfolio-backend-huy6.onrender.com'
+  const ADMIN_PASSWORD = 'Tamkuhi@274407' // Change this to your secure password
 
   const handleLogin = (e) => {
     e.preventDefault()
