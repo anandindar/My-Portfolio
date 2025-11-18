@@ -10,13 +10,21 @@ import Achievements from './components/Achievements'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import LoadingSpinner from './components/LoadingSpinner'
+import Admin from './components/Admin'
 import './App.css'
 
 function App() {
   const [loading, setLoading] = useState(true)
   const [showScrollTop, setShowScrollTop] = useState(false)
+  const [currentPage, setCurrentPage] = useState('home')
 
   useEffect(() => {
+    // Check URL for admin page
+    const path = window.location.pathname
+    if (path === '/admin' || path === '/admin.html') {
+      setCurrentPage('admin')
+    }
+
     // Set document title and meta description
     document.title = 'Anand Kumar Gupta - Data Science & AI Portfolio'
     
@@ -48,6 +56,11 @@ function App() {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  // Show admin page if accessing /admin
+  if (currentPage === 'admin') {
+    return <Admin />
   }
 
   return (

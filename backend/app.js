@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import contactRouter from './routes/contact.js'
+import messagesRouter from './routes/messages.js'
 
 const app = express()
 
@@ -17,7 +18,8 @@ app.get('/', (_req, res) => {
     message: 'Portfolio Backend API',
     endpoints: {
       health: '/health',
-      contact: '/api/contact'
+      contact: '/api/contact',
+      messages: '/api/messages'
     }
   })
 })
@@ -28,6 +30,7 @@ app.get('/health', (_req, res) => {
 
 // API routes
 app.use('/api/contact', contactRouter)
+app.use('/api/messages', messagesRouter)
 
 // Error handler
 app.use((err, _req, res, _next) => {
