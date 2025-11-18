@@ -24,6 +24,8 @@ const Contact = () => {
       setIsSubmitting(true)
       setStatus({ type: 'pending', message: 'Sending your message…' })
 
+      console.log('Sending to:', contactEndpoint)
+
       const response = await fetch(contactEndpoint, {
         method: 'POST',
         headers: {
@@ -37,9 +39,16 @@ const Contact = () => {
         })
       })
 
+      console.log('Response status:', response.status)
+
       if (!response.ok) {
-        throw new Error('Unable to send your message right now. Please try again in a moment.')
+        const errorData = await response.json().catch(() => ({}))
+        const errorMessage = errorData.message || 'Unable to send your message right now. Please try again in a moment.'
+        throw new Error(errorMessage)
       }
+
+      const data = await response.json()
+      console.log('Success:', data)
 
       setStatus({
         type: 'success',
@@ -47,7 +56,18 @@ const Contact = () => {
       })
       setFormData({ name: '', email: '', message: '' })
     } catch (error) {
-      setStatus({ type: 'error', message: error.message })
+      console.error('Contact form error:', error)
+      
+      // Better error messages for different scenarios
+      let errorMessage = error.message
+      
+      if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+        errorMessage = 'Unable to connect to the server. Please check your internet connection and try again.'
+      } else if (error.message.includes('timeout')) {
+        errorMessage = 'Request timed out. Please try again.'
+      }
+      
+      setStatus({ type: 'error', message: errorMessage })
     } finally {
       setIsSubmitting(false)
     }
