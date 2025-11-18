@@ -4,8 +4,9 @@ frontend/node_modules/
 
 # Build outputs
 dist/
-build/
 frontend/dist/
+frontend/build/
+# Keep backend/build for Render workaround
 
 # Environment variables
 .env
