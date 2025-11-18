@@ -21,6 +21,18 @@
   }
 }
 
+@keyframes colorFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .hero-content {
   max-width: 1400px;
   width: 100%;
@@ -65,7 +77,7 @@
   text-align: center;
   margin-bottom: auto;
   padding-top: 20px;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  text-shadow: none;
 }
 
 .hero-bottom {
@@ -83,7 +95,7 @@
   flex-direction: column;
   justify-content: flex-end;
   gap: 25px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  text-shadow: none;
 }
 
 .hero-bottom-right {
@@ -114,18 +126,17 @@
   letter-spacing: -1px;
   line-height: 1.2;
   color: #10b981;
-  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8),
-               0 0 20px rgba(16, 185, 129, 0.4);
+  text-shadow: none;
 }
 
 .highlight {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   position: relative;
   display: inline-block;
-  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.8));
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
 }
 
 .highlight::after {
@@ -135,9 +146,9 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+  background: linear-gradient(90deg, #ffffff, #f0f0f0);
   border-radius: 2px;
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .hero-subtitle {
