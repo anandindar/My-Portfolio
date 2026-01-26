@@ -8,10 +8,9 @@ import ibmCognos from '../assets/Image/ibm-cognos-analytics-v11-1-x-reporting-es
 const Certifications = () => {
   const [selectedCert, setSelectedCert] = useState(null)
 
-  // Scroll to top when modal opens
+  // Prevent body scroll when modal opens
   useEffect(() => {
     if (selectedCert) {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = 'unset'
