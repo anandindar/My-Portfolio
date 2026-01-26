@@ -27,6 +27,7 @@ const Certifications = () => {
       issuer: "IBM Skills Network",
       date: "Sep 2025",
       file: new URL('../assets/Image/Anand_32_Data_Science.pdf', import.meta.url).href,
+      type: 'pdf',
       description: "Advanced techniques for building and validating predictive models using statistical methods and machine learning algorithms."
     },
     {
@@ -34,6 +35,7 @@ const Certifications = () => {
       issuer: "IBM",
       date: "Sep 2025",
       file: new URL('../assets/Image/Anand_32_No_Sql.pdf', import.meta.url).href,
+      type: 'pdf',
       description: "Comprehensive introduction to data science concepts, tools, and methodologies for data-driven decision making."
     },
     {
@@ -41,6 +43,7 @@ const Certifications = () => {
       issuer: "IBM",
       date: "Sep 2025",
       file: new URL('../assets/Image/IBM DB0151EN Certificate _ IBM SkillsBuild.pdf', import.meta.url).href,
+      type: 'pdf',
       description: "Fundamentals of NoSQL databases and Database as a Service platforms including MongoDB, Cassandra, and cloud-based solutions."
     },
     {
@@ -48,6 +51,7 @@ const Certifications = () => {
       issuer: "Deloitte",
       date: "July 2025",
       file: new URL('../assets/Image/deloitte.pdf', import.meta.url).href,
+      type: 'pdf',
       details: "Practical tasks: Data analysis, Forensic technology",
       description: "Real-world data analytics challenges involving data exploration, visualization, and business intelligence report generation."
     },
@@ -56,6 +60,7 @@ const Certifications = () => {
       issuer: "IBM Data and AI",
       date: "Sep 2024",
       file: ibmCognos,
+      type: 'image',
       description: "Master IBM Cognos Analytics platform for creating interactive dashboards and comprehensive business reports."
     },
     {
@@ -63,6 +68,7 @@ const Certifications = () => {
       issuer: "Babu Banarasi Das University",
       date: "Feb 2024 – July 2024",
       file: new URL('../assets/Image/MAD_ANAND KUMAR GUPTA (1).pdf', import.meta.url).href,
+      type: 'pdf',
       description: "Complete mobile app development course covering both iOS and Android platforms with hands-on project experience."
     },
     {
@@ -70,6 +76,7 @@ const Certifications = () => {
       issuer: "IBM Developer Skills Network",
       date: "May 2024",
       file: new URL('../assets/Image/IBM_Cloud_Essentials_Badge20240508-7-rcr4z1.pdf', import.meta.url).href,
+      type: 'pdf',
       description: "Comprehensive guide to IBM Cloud infrastructure, services, and deployment best practices for modern applications."
     },
     {
@@ -77,6 +84,7 @@ const Certifications = () => {
       issuer: "IBM",
       date: "Nov 2023",
       file: new URL('../assets/Image/Data_Science_Foundations___Level_1_Badge20231107-29-sgwurs.pdf', import.meta.url).href,
+      type: 'pdf',
       description: "Foundational concepts in data science including Python programming, data manipulation, and exploratory data analysis."
     },
     {
@@ -84,6 +92,7 @@ const Certifications = () => {
       issuer: "IBM",
       date: "Sep 2024",
       file: new URL('../assets/Image/IBM_Cognos_Analytics_V11_1_x_Reporting_Essentials_Badge20240925-7-zlpx2m.pdf', import.meta.url).href,
+      type: 'pdf',
       description: "Professional badge certification for advanced IBM Cognos Analytics reporting and dashboard creation."
     },
     {
@@ -91,6 +100,7 @@ const Certifications = () => {
       issuer: "Babu Banarasi Das University",
       date: "2024",
       file: new URL('../assets/Image/IBM PY0101EN Certificate _ Babu Banarasi Das University.pdf', import.meta.url).href,
+      type: 'pdf',
       description: "Professional certification in Python development covering core programming concepts and practical applications."
     },
     {
@@ -98,6 +108,7 @@ const Certifications = () => {
       issuer: "AWS Training",
       date: "2024",
       file: new URL('../assets/Image/AWS_cloud.pdf', import.meta.url).href,
+      type: 'pdf',
       description: "Comprehensive AWS cloud services training covering EC2, S3, Lambda, and other core AWS services."
     },
     {
@@ -105,6 +116,7 @@ const Certifications = () => {
       issuer: "Amazon Web Services",
       date: "2024",
       file: new URL('../assets/Image/AWS_Certificate.pdf', import.meta.url).href,
+      type: 'pdf',
       description: "Amazon Web Services professional certification validating cloud architecture and deployment expertise."
     },
     {
@@ -112,6 +124,7 @@ const Certifications = () => {
       issuer: "Google Cloud",
       date: "2024",
       file: new URL('../assets/Image/Google_Certificate.pdf', import.meta.url).href,
+      type: 'pdf',
       description: "Google Cloud Platform professional certification for cloud infrastructure and services management."
     },
     {
@@ -119,6 +132,7 @@ const Certifications = () => {
       issuer: "Microsoft",
       date: "2024",
       file: new URL('../assets/Image/Microsoft_PoweBI.pdf', import.meta.url).href,
+      type: 'pdf',
       description: "Advanced Power BI certification for business intelligence dashboards and data visualization."
     },
     {
@@ -126,6 +140,7 @@ const Certifications = () => {
       issuer: "Microsoft",
       date: "2024",
       file: new URL('../assets/Image/MS-Excel.pdf', import.meta.url).href,
+      type: 'pdf',
       description: "Expert-level Microsoft Excel certification covering advanced functions, pivot tables, and data analysis."
     }
   ]
@@ -178,13 +193,13 @@ const Certifications = () => {
             <div className="cert-modal-content">
               {/* Left side - Certificate Preview */}
               <div className="cert-modal-left">
-                {selectedCert.file && selectedCert.file.endsWith('.png') ? (
+                {selectedCert.type === 'image' ? (
                   <img 
                     src={selectedCert.file} 
                     alt={selectedCert.title}
                     className="cert-preview-image"
                   />
-                ) : selectedCert.file && selectedCert.file.endsWith('.pdf') ? (
+                ) : selectedCert.type === 'pdf' ? (
                   <div className="cert-pdf-preview">
                     <FaFilePdf className="pdf-icon" />
                     <p>PDF Certificate</p>
@@ -223,7 +238,7 @@ const Certifications = () => {
                   )}
                 </div>
                 <div className="modal-footer">
-                  {selectedCert.file && selectedCert.file.endsWith('.pdf') && (
+                  {selectedCert.type === 'pdf' && (
                     <a 
                       href={selectedCert.file} 
                       target="_blank" 
