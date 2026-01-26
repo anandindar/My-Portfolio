@@ -1,37 +1,50 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FaCertificate, FaTimes, FaFilePdf } from 'react-icons/fa'
 import './Certifications.css'
 
 const Certifications = () => {
   const [selectedCert, setSelectedCert] = useState(null)
 
+  // Scroll to top when modal opens
+  useEffect(() => {
+    if (selectedCert) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [selectedCert])
+
   const certifications = [
     {
       title: "Predictive Modeling Fundamentals I",
       issuer: "IBM Skills Network",
       date: "Sep 2025",
-      file: "/src/assets/Image/Anand_32_Data_Science.pdf",
+      file: "/assets/Image/Anand_32_Data_Science.pdf",
       description: "Advanced techniques for building and validating predictive models using statistical methods and machine learning algorithms."
     },
     {
       title: "Data Science 101",
       issuer: "IBM",
       date: "Sep 2025",
-      file: "/src/assets/Image/Anand_32_No_Sql.pdf",
+      file: "/assets/Image/Anand_32_No_Sql.pdf",
       description: "Comprehensive introduction to data science concepts, tools, and methodologies for data-driven decision making."
     },
     {
       title: "NoSQL and DBaaS 101",
       issuer: "IBM",
       date: "Sep 2025",
-      file: "/src/assets/Image/IBM DB0151EN Certificate _ IBM SkillsBuild.pdf",
+      file: "/assets/Image/IBM DB0151EN Certificate _ IBM SkillsBuild.pdf",
       description: "Fundamentals of NoSQL databases and Database as a Service platforms including MongoDB, Cassandra, and cloud-based solutions."
     },
     {
       title: "Deloitte Data Analytics Job Simulation",
       issuer: "Deloitte",
       date: "July 2025",
-      file: "/src/assets/Image/deloitte.pdf",
+      file: "/assets/Image/deloitte.pdf",
       details: "Practical tasks: Data analysis, Forensic technology",
       description: "Real-world data analytics challenges involving data exploration, visualization, and business intelligence report generation."
     },
@@ -39,77 +52,77 @@ const Certifications = () => {
       title: "IBM Cognos Analytics V11.1.x Reporting Essentials",
       issuer: "IBM Data and AI",
       date: "Sep 2024",
-      file: "/src/assets/Image/ibm-cognos-analytics-v11-1-x-reporting-essentials.png",
+      file: "/assets/Image/ibm-cognos-analytics-v11-1-x-reporting-essentials.png",
       description: "Master IBM Cognos Analytics platform for creating interactive dashboards and comprehensive business reports."
     },
     {
       title: "Mobile Application Development",
       issuer: "Babu Banarasi Das University",
       date: "Feb 2024 – July 2024",
-      file: "/src/assets/Image/MAD_ANAND KUMAR GUPTA (1).pdf",
+      file: "/assets/Image/MAD_ANAND KUMAR GUPTA (1).pdf",
       description: "Complete mobile app development course covering both iOS and Android platforms with hands-on project experience."
     },
     {
       title: "IBM Cloud Essentials",
       issuer: "IBM Developer Skills Network",
       date: "May 2024",
-      file: "/src/assets/Image/IBM_Cloud_Essentials_Badge20240508-7-rcr4z1.pdf",
+      file: "/assets/Image/IBM_Cloud_Essentials_Badge20240508-7-rcr4z1.pdf",
       description: "Comprehensive guide to IBM Cloud infrastructure, services, and deployment best practices for modern applications."
     },
     {
       title: "IBM Data Science Foundations – Level 1",
       issuer: "IBM",
       date: "Nov 2023",
-      file: "/src/assets/Image/Data_Science_Foundations___Level_1_Badge20231107-29-sgwurs.pdf",
+      file: "/assets/Image/Data_Science_Foundations___Level_1_Badge20231107-29-sgwurs.pdf",
       description: "Foundational concepts in data science including Python programming, data manipulation, and exploratory data analysis."
     },
     {
       title: "IBM Cognos Analytics V11.1.x Reporting Essentials Badge",
       issuer: "IBM",
       date: "Sep 2024",
-      file: "/src/assets/Image/IBM_Cognos_Analytics_V11_1_x_Reporting_Essentials_Badge20240925-7-zlpx2m.pdf",
+      file: "/assets/Image/IBM_Cognos_Analytics_V11_1_x_Reporting_Essentials_Badge20240925-7-zlpx2m.pdf",
       description: "Professional badge certification for advanced IBM Cognos Analytics reporting and dashboard creation."
     },
     {
       title: "Python Development Certificate",
       issuer: "Babu Banarasi Das University",
       date: "2024",
-      file: "/src/assets/Image/IBM PY0101EN Certificate _ Babu Banarasi Das University.pdf",
+      file: "/assets/Image/IBM PY0101EN Certificate _ Babu Banarasi Das University.pdf",
       description: "Professional certification in Python development covering core programming concepts and practical applications."
     },
     {
       title: "AWS Cloud Essentials",
       issuer: "AWS Training",
       date: "2024",
-      file: "/src/assets/Image/AWS_cloud.pdf",
+      file: "/assets/Image/AWS_cloud.pdf",
       description: "Comprehensive AWS cloud services training covering EC2, S3, Lambda, and other core AWS services."
     },
     {
       title: "AWS Certificate",
       issuer: "Amazon Web Services",
       date: "2024",
-      file: "/src/assets/Image/AWS_Certificate.pdf",
+      file: "/assets/Image/AWS_Certificate.pdf",
       description: "Amazon Web Services professional certification validating cloud architecture and deployment expertise."
     },
     {
       title: "Google Cloud Certificate",
       issuer: "Google Cloud",
       date: "2024",
-      file: "/src/assets/Image/Google_Certificate.pdf",
+      file: "/assets/Image/Google_Certificate.pdf",
       description: "Google Cloud Platform professional certification for cloud infrastructure and services management."
     },
     {
       title: "Microsoft Power BI",
       issuer: "Microsoft",
       date: "2024",
-      file: "/src/assets/Image/Microsoft_PoweBI.pdf",
+      file: "/assets/Image/Microsoft_PoweBI.pdf",
       description: "Advanced Power BI certification for business intelligence dashboards and data visualization."
     },
     {
       title: "MS Excel Expert",
       issuer: "Microsoft",
       date: "2024",
-      file: "/src/assets/Image/MS-Excel.pdf",
+      file: "/assets/Image/MS-Excel.pdf",
       description: "Expert-level Microsoft Excel certification covering advanced functions, pivot tables, and data analysis."
     }
   ]
