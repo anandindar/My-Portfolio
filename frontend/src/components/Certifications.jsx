@@ -123,6 +123,9 @@ const Certifications = () => {
             key={index} 
             className="cert-card"
             onClick={() => setSelectedCert(cert)}
+            role="button"
+            tabIndex={0}
+            onKeyPress={(e) => e.key === 'Enter' && setSelectedCert(cert)}
           >
             <div className="cert-icon">
               <FaCertificate />
@@ -138,11 +141,20 @@ const Certifications = () => {
 
       {/* Modal for Certificate Details */}
       {selectedCert && (
-        <div className="cert-modal-overlay" onClick={() => setSelectedCert(null)}>
-          <div className="cert-modal" onClick={(e) => e.stopPropagation()}>
+        <div 
+          className="cert-modal-overlay" 
+          onClick={() => setSelectedCert(null)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div 
+            className="cert-modal" 
+            onClick={(e) => e.stopPropagation()}
+          >
             <button 
               className="cert-modal-close"
               onClick={() => setSelectedCert(null)}
+              aria-label="Close certificate modal"
             >
               <FaTimes />
             </button>
