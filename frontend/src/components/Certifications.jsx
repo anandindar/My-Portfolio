@@ -8,27 +8,12 @@ import ibmCognos from '../assets/Image/ibm-cognos-analytics-v11-1-x-reporting-es
 const Certifications = () => {
   const [selectedCert, setSelectedCert] = useState(null)
 
-  // Prevent body scroll when modal opens
+  // Simple scroll lock when modal opens
   useEffect(() => {
     if (selectedCert) {
-      const scrollY = window.scrollY
       document.body.style.overflow = 'hidden'
-      document.body.style.position = 'fixed'
-      document.body.style.width = '100%'
-      document.body.style.top = `-${scrollY}px`
     } else {
-      const scrollY = parseInt(document.body.style.top || '0') * -1
-      document.body.style.overflow = 'unset'
-      document.body.style.position = 'unset'
-      document.body.style.width = 'unset'
-      document.body.style.top = 'unset'
-      window.scrollTo(0, scrollY)
-    }
-    return () => {
-      document.body.style.overflow = 'unset'
-      document.body.style.position = 'unset'
-      document.body.style.width = 'unset'
-      document.body.style.top = 'unset'
+      document.body.style.overflow = 'auto'
     }
   }, [selectedCert])
 
