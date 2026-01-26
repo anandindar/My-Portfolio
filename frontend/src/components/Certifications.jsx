@@ -148,28 +148,6 @@ const Certifications = () => {
             </button>
             
             <div className="cert-modal-content">
-              {/* Left side - Icon and Basic Info */}
-              <div className="cert-modal-left">
-                <div className="cert-modal-icon">
-                  <FaCertificate />
-                </div>
-                <h2>{selectedCert.title}</h2>
-                <p className="modal-issuer">{selectedCert.issuer}</p>
-                <p className="modal-date">{selectedCert.date}</p>
-              </div>
-
-      {/* Modal for Certificate Details */}
-      {selectedCert && (
-        <div className="cert-modal-overlay" onClick={() => setSelectedCert(null)}>
-          <div className="cert-modal" onClick={(e) => e.stopPropagation()}>
-            <button 
-              className="cert-modal-close"
-              onClick={() => setSelectedCert(null)}
-            >
-              <FaTimes />
-            </button>
-            
-            <div className="cert-modal-content">
               {/* Left side - Certificate Preview */}
               <div className="cert-modal-left">
                 {selectedCert.file && selectedCert.file.endsWith('.png') ? (
