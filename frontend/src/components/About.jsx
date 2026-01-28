@@ -22,15 +22,16 @@ const About = () => {
             which has honed my leadership, communication, and team management skills.
           </p>
         </div>
+
+        <div className="currently-doing">
+          <h3><strong>Currently Working</strong></h3>
+          <p>Internship / Industrial Training Program in Data Analytics</p>
+        </div>
         
         <div className="about-stats">
           <div className="stat-card">
             <h3>15+</h3>
             <p>Certifications</p>
-          </div>
-          <div className="stat-card">
-            <h3>Currently Intership in NIELIT Lucknow</h3>
-            <p>Student (Fresher)</p>
           </div>
           <div className="stat-card">
             <h3>5+</h3>
