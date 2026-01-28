@@ -127,13 +127,11 @@
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   width: 100%;
   max-width: 900px;
-  position: relative;
   animation: slideInUp 0.4s ease-out;
   border: 2px solid var(--border-color);
   max-height: 85vh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  margin: auto;
 }
 
 @keyframes slideInUp {

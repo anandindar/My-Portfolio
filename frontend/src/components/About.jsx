@@ -29,7 +29,7 @@ const About = () => {
             <p>Certifications</p>
           </div>
           <div className="stat-card">
-            <h3>Intern</h3>
+            <h3>Currently Intership in NIELIT Lucknow</h3>
             <p>Student (Fresher)</p>
           </div>
           <div className="stat-card">
