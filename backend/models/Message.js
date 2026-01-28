@@ -29,6 +29,10 @@ const messageSchema = new mongoose.Schema(
   }
 )
 
+// Add indexes for better query performance
+messageSchema.index({ createdAt: -1 })
+messageSchema.index({ email: 1 })
+
 const Message = mongoose.model('Message', messageSchema)
 
 export default Message

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FaEnvelope, FaPhone, FaLinkedin, FaGithub, FaMapMarkerAlt, FaPaperPlane } from 'react-icons/fa'
+import { FaEnvelope, FaPhone, FaLinkedin, FaGithub, FaMapMarkerAlt, FaPaperPlane, FaInstagram } from 'react-icons/fa'
 import './Contact.css'
 
 const Contact = () => {
@@ -143,6 +143,18 @@ const Contact = () => {
                 <h4>GitHub</h4>
                 <a href="https://github.com/anandindar" target="_blank" rel="noopener noreferrer">
                   View Projects
+                </a>
+              </div>
+            </div>
+
+            <div className="contact-item">
+              <div className="contact-item-icon">
+                <FaInstagram />
+              </div>
+              <div className="contact-item-content">
+                <h4>Instagram</h4>
+                <a href="https://www.instagram.com/anand_indar?igsh=MXJnZXI2NXhnZm90Nw==" target="_blank" rel="noopener noreferrer">
+                  Follow Me
                 </a>
               </div>
             </div>
