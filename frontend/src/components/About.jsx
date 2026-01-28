@@ -25,7 +25,7 @@ const About = () => {
 
         <div className="currently-doing">
           <h3><strong>Currently Working</strong></h3>
-          <p>Internship / Industrial Training Program in Data Analytics</p>
+          <p>Internship / Industrial Training Program in Data Analytics in NIELIT Lucknow</p>
         </div>
         
         <div className="about-stats">
