@@ -9,7 +9,7 @@ services:
       - key: NODE_VERSION
         value: 18.17.0
       - key: VITE_CONTACT_ENDPOINT
-        value: https://my-portfolio-backend.onrender.com/api/contact
+        value: https://my-portfolio-backend-huy6.onrender.com/api/contact
         sync: false
 
   # Backend Web Service

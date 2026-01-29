@@ -22,7 +22,7 @@ const Contact = () => {
     if (import.meta.env.PROD) {
       // This will be set in render.yaml VITE_CONTACT_ENDPOINT env var
       // Fallback to a production URL (update this with your actual backend URL)
-      return 'https://my-portfolio-backend.onrender.com/api/contact'
+      return 'https://my-portfolio-backend-huy6.onrender.com/api/contact'
     }
     
     // Development: use localhost
