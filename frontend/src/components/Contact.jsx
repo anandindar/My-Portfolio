@@ -11,9 +11,25 @@ const Contact = () => {
   const [status, setStatus] = useState({ type: 'idle', message: '' })
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  // Use full backend URL to ensure it works on mobile
-  const contactEndpoint = import.meta.env.VITE_CONTACT_ENDPOINT || 
-    'https://my-portfolio-backend-huy6.onrender.com/api/contact'
+  // Get the backend URL from environment variable or construct it dynamically
+  const getContactEndpoint = () => {
+    // First, check for explicit environment variable
+    if (import.meta.env.VITE_CONTACT_ENDPOINT) {
+      return import.meta.env.VITE_CONTACT_ENDPOINT
+    }
+    
+    // In production on Render, use the backend service URL
+    if (import.meta.env.PROD) {
+      // This will be set in render.yaml VITE_CONTACT_ENDPOINT env var
+      // Fallback to a production URL (update this with your actual backend URL)
+      return 'https://my-portfolio-backend.onrender.com/api/contact'
+    }
+    
+    // Development: use localhost
+    return 'http://localhost:5000/api/contact'
+  }
+
+  const contactEndpoint = getContactEndpoint()
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -28,6 +44,9 @@ const Contact = () => {
 
       console.log('Sending to:', contactEndpoint)
 
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 10000) // 10 second timeout
+
       const response = await fetch(contactEndpoint, {
         method: 'POST',
         headers: {
@@ -38,9 +57,11 @@ const Contact = () => {
           name: formData.name,
           email: formData.email,
           message: formData.message
-        })
+        }),
+        signal: controller.signal
       })
 
+      clearTimeout(timeoutId)
       console.log('Response status:', response.status)
 
       if (!response.ok) {
@@ -63,7 +84,9 @@ const Contact = () => {
       // Better error messages for different scenarios
       let errorMessage = error.message
       
-      if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+      if (error.name === 'AbortError') {
+        errorMessage = 'Request timed out. The server is taking too long to respond. Please try again.'
+      } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
         errorMessage = 'Unable to connect to the server. Please check your internet connection and try again.'
       } else if (error.message.includes('timeout')) {
         errorMessage = 'Request timed out. Please try again.'

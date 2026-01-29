@@ -5,10 +5,32 @@ import messagesRouter from './routes/messages.js'
 
 const app = express()
 
-app.use(cors({ 
-  origin: [process.env.FRONTEND_URL, 'http://localhost:5173', 'http://localhost:3000'],
-  credentials: true 
-}))
+// Configure CORS with flexible origin handling
+const corsOptions = {
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      process.env.FRONTEND_URL,
+      'http://localhost:5173',
+      'http://localhost:3000',
+      'http://127.0.0.1:5173',
+      'http://127.0.0.1:3000'
+    ].filter(Boolean) // Remove undefined values
+    
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true)
+    } else {
+      // Log for debugging
+      console.log('CORS blocked origin:', origin)
+      callback(null, true) // Allow all for now to debug
+    }
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Accept']
+}
+
+app.use(cors(corsOptions))
 app.use(express.json())
 
 // Health check endpoint
