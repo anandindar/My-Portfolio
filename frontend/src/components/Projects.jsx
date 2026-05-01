@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaProjectDiagram, FaGithub, FaExternalLinkAlt, FaDatabase, FaChartBar } from 'react-icons/fa'
+import { FaProjectDiagram, FaGithub, FaExternalLinkAlt, FaDatabase, FaChartBar, FaFilm } from 'react-icons/fa'
 import './Projects.css'
 
 const Projects = () => {
@@ -16,7 +16,8 @@ const Projects = () => {
         "Reduced customer churn by 25%"
       ],
       category: "Machine Learning",
-      color: "blue"
+      color: "blue",
+      liveLink: null
     },
     {
       title: "Netflix Movie Data Analysis",
@@ -30,7 +31,8 @@ const Projects = () => {
         "Country-wise content analysis"
       ],
       category: "Data Analytics",
-      color: "purple"
+      color: "purple",
+      liveLink: null
     },
     {
       title: "Data Visualization Dashboard",
@@ -44,7 +46,8 @@ const Projects = () => {
         "Mobile-responsive design"
       ],
       category: "Business Intelligence",
-      color: "green"
+      color: "green",
+      liveLink: null
     },
     {
       title: "IPL Dashboard Analytics",
@@ -58,9 +61,9 @@ const Projects = () => {
         "Automated refresh ready for future seasons"
       ],
       category: "Business Intelligence",
-      color: "orange"
-    }
-    ,
+      color: "orange",
+      liveLink: null
+    },
     {
       title: "Superstore Sales Analysis",
       description: "Performed end-to-end analysis on the Superstore dataset to surface sales, profit, and customer insights. Built interactive dashboards for executive and operational use.",
@@ -73,7 +76,23 @@ const Projects = () => {
         "Optimized visualizations for drill-down and export"
       ],
       category: "Data Analytics",
-      color: "blue"
+      color: "blue",
+      liveLink: null
+    },
+    {
+      title: "Movie Recommendation System",
+      description: "Developed an intelligent movie recommendation system powered by machine learning algorithms. The Streamlit-based application provides personalized movie suggestions using collaborative filtering and content-based recommendations.",
+      icon: <FaFilm />,
+      technologies: ["Python", "Streamlit", "Machine Learning", "Pandas", "Scikit-learn"],
+      highlights: [
+        "Intelligent movie recommendation engine",
+        "User-friendly Streamlit interface",
+        "Personalized suggestions based on preferences",
+        "Live deployed application on Streamlit Cloud"
+      ],
+      category: "Machine Learning",
+      color: "purple",
+      liveLink: "https://movie-recommendation-system-cfpohcsyrtzfddnfzj7ttv.streamlit.app/"
     }
   ]
 
@@ -134,10 +153,18 @@ const Projects = () => {
             </div>
 
             <div className="project-footer">
-              <button className="btn-project btn-primary">
-                <FaExternalLinkAlt />
-                View Details
-              </button>
+              {project.liveLink && (
+                <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="btn-project btn-primary">
+                  <FaExternalLinkAlt />
+                  View Live
+                </a>
+              )}
+              {!project.liveLink && (
+                <button className="btn-project btn-primary" disabled>
+                  <FaExternalLinkAlt />
+                  View Details
+                </button>
+              )}
               <button className="btn-project btn-secondary">
                 <FaGithub />
                 Source Code

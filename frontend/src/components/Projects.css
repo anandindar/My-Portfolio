@@ -313,6 +313,18 @@
   box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
 }
 
+.btn-project:disabled,
+.btn-project[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-project:disabled:hover,
+.btn-project[disabled]:hover {
+  transform: none;
+  box-shadow: none;
+}
+
 .btn-project svg {
   font-size: 1rem;
   transition: transform 0.3s ease;
