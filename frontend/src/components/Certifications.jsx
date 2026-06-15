@@ -26,6 +26,14 @@ const Certifications = () => {
 
   const certifications = [
     {
+      title: "Nilet Certificate 2026",
+      issuer: "Nilet",
+      date: "2026",
+      file: new URL('../assets/Image/Nilet Certificate 2026.pdf', import.meta.url).href,
+      type: 'pdf',
+      description: "Professional certification demonstrating expertise and achievement in Nilet certification program."
+    },
+    {
       title: "Predictive Modeling Fundamentals I",
       issuer: "IBM Skills Network",
       date: "Sep 2025",
